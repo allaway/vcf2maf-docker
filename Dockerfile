@@ -4,6 +4,8 @@ LABEL \
   description="vcf2maf image based on sarek vep container" \
   maintainer="robert.allaway@sagebionetworks.org"
 
+SHELL ["/bin/bash", "-c"]
+
 RUN . /opt/conda/etc/profile.d/conda.sh && \
     source activate nf-core-sarek-vep-2.6.1 && \
     conda install -c bioconda genesplicer=1.0 htslib=1.10.2 bcftools=1.10.2 samtools=1.10 ucsc-liftover=377
