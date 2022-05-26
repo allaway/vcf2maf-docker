@@ -10,8 +10,8 @@ RUN conda env create -f /environment.yml && conda clean -a
 
 ENV PATH /opt/conda/envs/vcf2maf/bin:$PATH
 
-COPY install_vep.sh /install_vep.sh
-RUN /install_vep.sh
+COPY install_vep.sh $HOME/install_vep.sh
+RUN $HOME/install_vep.sh
 
 #RUN . /opt/conda/etc/profile.d/conda.sh && \
 #    source activate nf-core-sarek-vep-2.7.1 && \
