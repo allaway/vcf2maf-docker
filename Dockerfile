@@ -14,4 +14,4 @@ RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/mskcc/vcf
 RUN bash -c 'curl -L -o mskcc-vcf2maf.tar.gz $VCF2MAF_URL; tar -zxf mskcc-vcf2maf.tar.gz; cd mskcc-vcf2maf-*'
 
 # Dump the details of the installed packages to a file for posterity
-RUN conda env export --name nf-core-sarek-vep-2.6.1 > nf-core-sarek-vep-2.6.1.yml
+RUN conda env export --name nf-core-sarek-vep-2.7.1 > nf-core-sarek-vep-2.7.1.yml
