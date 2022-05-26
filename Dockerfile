@@ -4,9 +4,9 @@ LABEL \
   description="vcf2maf image based on sarek vep container" \
   maintainer="robert.allaway@sagebionetworks.org"
 
-RUN conda init bash
-RUN conda activate nf-core-sarek-vep-2.6.1
-RUN conda install -c bioconda genesplicer=1.0 htslib=1.10.2 bcftools=1.10.2 samtools=1.10 ucsc-liftover=377'
+RUN . /opt/conda/etc/profile.d/conda.sh && \
+    conda activate nf-core-sarek-vep-2.6.1 && \
+    conda install -c bioconda genesplicer=1.0 htslib=1.10.2 bcftools=1.10.2 samtools=1.10 ucsc-liftover=377
 
 RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/mskcc/vcf2maf/releases | grep -m1 tarball_url | cut -d\" -f4`'
 RUN bash -c 'curl -L -o mskcc-vcf2maf.tar.gz $VCF2MAF_URL; tar -zxf mskcc-vcf2maf.tar.gz; cd mskcc-vcf2maf-*'
