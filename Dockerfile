@@ -5,8 +5,6 @@ LABEL \
   maintainer="robert.allaway@sagebionetworks.org"
 
 #SHELL ["/bin/bash", "-c"]
-RUN useradd -ms /bin/bash -G sudo user
-USER user
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
 
