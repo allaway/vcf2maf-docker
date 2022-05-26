@@ -7,8 +7,7 @@ LABEL \
 SHELL ["/bin/bash", "-c"]
 
 RUN . /opt/conda/etc/profile.d/conda.sh && \
-    conda info --envs && \
-    source activate nf-core-sarek-vep-2.6.1 && \
+    source activate nf-core-sarek-vep-2.7.1 && \
     conda install -c bioconda genesplicer=1.0 htslib=1.10.2 bcftools=1.10.2 samtools=1.10 ucsc-liftover=377
 
 RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/mskcc/vcf2maf/releases | grep -m1 tarball_url | cut -d\" -f4`'
