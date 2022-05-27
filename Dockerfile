@@ -21,3 +21,5 @@ RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/mskcc/vcf
 
 # Dump the details of the installed packages to a file for posterity
 RUN conda env export --name vcf2maf > vcf2maf.yml
+
+RUN mkdir /workdir
