@@ -7,7 +7,7 @@ channels:
   - defaults
 
 dependencies:
-  - bioconda::ensembl-vep=99.2
+  - bioconda::ensembl-vep=106.1
   - bioconda::genesplicer=1.0
   - bioconda::htslib=1.10.2
   - bioconda::bcftools=1.10.2
