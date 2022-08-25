@@ -7,9 +7,9 @@ channels:
   - defaults
 
 dependencies:
-  - bioconda::ensembl-vep=106.1
+  - bioconda::ensembl-vep=107
   - bioconda::genesplicer=1.0
-  - bioconda::htslib=1.10.2
-  - bioconda::bcftools=1.10.2
-  - bioconda::samtools=1.10
+  - bioconda::htslib=1.14
+  - bioconda::bcftools=1.14
+  - bioconda::samtools=1.14
   - bioconda::ucsc-liftover=377

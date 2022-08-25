@@ -1,9 +1,14 @@
-FROM nfcore/base:1.9
+FROM amazon/aws-cli
 LABEL \
   author="Robert Allaway" \
   description="vcf2maf image based on sarek vep container" \
   maintainer="robert.allaway@sagebionetworks.org"
 
+#Install miniconda
+RUN curl -sL https://repo.anaconda.com/miniconda/Miniconda3-py37_4.9.2-Linux-x86_64.sh -o /tmp/miniconda.sh
+RUN sh /tmp/miniconda.sh -bfp /root/miniconda3
+ENV PATH=/root/miniconda3/bin:$PATH
+ARG PATH=/root/miniconda3/bin:$PATH
 
 # Create conda environment 
 COPY environment.yml /
@@ -17,15 +22,14 @@ ENV PATH /opt/conda/envs/vcf2maf/bin:$PATH
 # RUN bash -c "chmod 755 /bin/install_vep.sh"
 # RUN /bin/install_vep.sh
 
-# Install AWS CLI
-RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-RUN unzip awscliv2.zip
-RUN sudo ./aws/install
+# rsync
+RUN yum install -y rsync \
+    tar
 
 # Get v106 cache
-RUN mkdir -p $HOME/.vep/homo_sapiens/102_GRCh38/
-RUN rsync -avr --progress rsync://ftp.ensembl.org/pub/release-106/variation/indexed_vep_cache/homo_sapiens_vep_106_GRCh38.tar.gz $HOME/.vep/
-RUN tar -zxf $HOME/.vep/homo_sapiens_vep_106_GRCh38.tar.gz -C $HOME/.vep/
+RUN mkdir -p $HOME/.vep/
+RUN rsync -avr --progress rsync://ftp.ensembl.org/ensembl/pub/release-107/variation/indexed_vep_cache/homo_sapiens_vep_107_GRCh38.tar.gz $HOME/.vep/
+RUN tar -zxf $HOME/.vep/homo_sapiens_vep_107_GRCh38.tar.gz -C $HOME/.vep/
 #RUN rsync -avr --progress rsync://ftp.ensembl.org/pub/release-106/fasta/homo_sapiens/dna_index/Homo_sapiens.GRCh38.dna.toplevel.fa.gz
 
 # Get GATK FASTA
