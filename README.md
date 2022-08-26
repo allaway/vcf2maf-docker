@@ -18,6 +18,6 @@ cd /mskcc-vcf2maf-*
 
 ##test
 
-perl vcf2maf.pl --input-vcf /workdir/vcfs/28cNF.Strelka.filtered.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /workdir/vep --ncbi-build GRCh38
+perl vcf2maf.pl --input-vcf /workdir/vcfs/28cNF.Strelka.filtered.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /root/miniconda3/envs/vcf2maf/bin --vep-data /workdir/vep --ncbi-build GRCh38
 
 ```
