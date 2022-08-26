@@ -21,3 +21,17 @@ cd /nf-osi-vcf2maf-*
 perl vcf2maf.pl --input-vcf /workdir/vcfs/28cNF.Strelka.filtered.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /root/miniconda3/envs/vcf2maf/bin --vep-data /workdir/vep --ncbi-build GRCh38
 
 ```
+
+Example loop to run in docker container:
+```
+
+for i in /workdir/vcfs/*.vcf; do
+	echo $i 
+	ic=$(basename ${i})
+    ic=${ic%.Strelka.filtered.vcf}  ##change this to trim to your sample ID as necessary
+
+    perl vcf2maf.pl --input-vcf $i --output-maf /workdir/${ic}.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /root/miniconda3/envs/vcf2maf/bin --vep-data /workdir/vep --ncbi-build GRCh38
+done
+
+
+```
