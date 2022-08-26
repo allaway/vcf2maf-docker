@@ -3,12 +3,16 @@
 ```
 ## Need to have rsync and the aws-cliv2 installed.
 
+## Get VEP 107 database. 
 rsync -avr --progress rsync://ftp.ensembl.org/ensembl/pub/release-107/variation/indexed_vep_cache/homo_sapiens_vep_107_GRCh38.tar.gz $HOME/.vep/
 tar -zxf $HOME/.vep/homo_sapiens_vep_107_GRCh38.tar.gz -C $HOME/.vep/
 
+## Get GATK GRCh38 genome (or whatever genome you aligned to if not this one...)
 aws s3 --no-sign-request --region eu-west-1 sync s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/ $HOME/Homo_sapiens_GATK_GRCh38/
 
-docker run -v $HOME/vcfs:/workdir:rw -v $HOME/vep:$HOME/.vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta/:$HOME/fasta -it --entrypoint /bin/bash nfosi/vcf2maf
+## Get vcfs. Place in $HOME/vcfs
+
+docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/vep:/workdir/vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta:/workdir/fasta:ro -it --entrypoint /bin/bash nfosi/vcf2maf
 
 cd /mskcc-vcf2maf-*
 
