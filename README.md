@@ -16,6 +16,8 @@ docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/vep:/workdir/vep:ro -v $HOME/
 
 cd /mskcc-vcf2maf-*
 
-##technically this test file is GRCh37, but it's more just to make sure the software is all playing nice...
-perl vcf2maf.pl --input-vcf tests/test.vcf --output-maf tests/test.vep.maf --ref-fasta /root/.vep/homo_sapiens/102_GRCh38/Homo_sapiens.GRCh38.dna.toplevel.fa.gz --vep-path /opt/conda/envs/vcf2maf/bin/ --ncbi-build GRCh38
+##test
+
+perl vcf2maf.pl --input-vcf /workdir/vcfs/28cNF.Strelka.filtered.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /workdir/vep --ncbi-build GRCh38
+
 ```
