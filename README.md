@@ -1,5 +1,8 @@
 # vcf2maf-vep
 
+
+This Dockerfile is loosely based on [this gist](https://gist.github.com/ckandoth/61c65ba96b011f286220fa4832ad2bc0) and can be used to create a Docker image with all of the necessary dependencies for vcf2maf to run with Ensemble v107. You just need to provide (1) the VEP 107 cache (instructions for grabbing it with rsync below) and (2) the genomic FASTA that you aligned to (for the NF-OSI pipeline, we currently use the GATK GRCh38 build, which can be acquired from iGenomes (instructions for grabbing it with the AWS CLI below). 
+
 ```
 ## Need to have rsync and the aws-cliv2 installed.
 
