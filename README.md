@@ -5,6 +5,8 @@ This Dockerfile is loosely based on [this gist](https://gist.github.com/ckandoth
 
 The Docker repository for this is: https://hub.docker.com/r/nfosi/vcf2maf
 
+Currently, this image uses a custom fork of vcf2maf to address a small incompatibility with VEP v107. When https://github.com/mskcc/vcf2maf/issues/322 is resolved, we can switch back to the real release of vcf2maf. 
+
 ```
 ## Need to have rsync and the aws-cliv2 installed.
 
