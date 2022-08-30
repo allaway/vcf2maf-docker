@@ -29,5 +29,5 @@ RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/nf-osi/vc
 RUN conda env export --name vcf2maf > vcf2maf.yml
 RUN conda init bash
 
-RUN mkdir /workdi
+RUN mkdir /workdir
 
