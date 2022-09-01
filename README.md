@@ -19,6 +19,8 @@ aws s3 --no-sign-request --region eu-west-1 sync s3://ngi-igenomes/igenomes/Homo
 
 ## Get vcfs. Place in $HOME/vcfs
 
+gunzip $HOME/vcfs/*
+
 docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/vep:/workdir/vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta:/workdir/fasta:ro -it --entrypoint /bin/bash nfosi/vcf2maf
 
 cd /nf-osi-vcf2maf-*
