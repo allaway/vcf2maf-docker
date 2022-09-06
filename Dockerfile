@@ -2,7 +2,7 @@ FROM amazonlinux:latest
 
 LABEL \
   author="Robert Allaway" \
-  description="vcf2maf image based on sarek vep container" \
+  description="vcf2maf image based on gist by ckandoth" \
   maintainer="robert.allaway@sagebionetworks.org"
 
 #Install miniconda
