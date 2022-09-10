@@ -13,21 +13,21 @@ ENV PATH=/root/miniconda3/bin:$PATH
 
 # Create conda environment 
 COPY environment.yml /
-RUN conda env create -f /environment.yml && conda clean -a
-ENV PATH=/root/miniconda3/envs/vcf2maf/bin:$PATH
+RUN conda env update --name base --file /environment.yml --prune && conda clean -a
+ENV PATH=/root/miniconda3/bin:$PATH
 
 # rsync
-RUN yum install -y rsync \
+RUN yum install -y wget \
     tar \
-    perl \
-    which
+    gzip \
+    perl
 
 # Install vcf2maf
-RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/nf-osi/vcf2maf/releases | grep -m1 tarball_url | cut -d\" -f4`; curl -L -o nf-osi-vcf2maf.tar.gz $VCF2MAF_URL; tar -zxf nf-osi-vcf2maf.tar.gz; cd nf-osi-vcf2maf-*'
+RUN wget -q https://github.com/Sage-Bionetworks-Workflows/vcf2maf/archive/refs/heads/gnomad-genomes.tar.gz \
+  && tar -zxf gnomad-genomes.tar.gz \
+  && chmod a+x /vcf2maf-gnomad-genomes/*.pl
+ENV PATH=/vcf2maf-gnomad-genomes:$PATH
 
-# Dump the details of the installed packages to a file for posterity
-RUN conda env export --name vcf2maf > vcf2maf.yml
+# # Dump the details of the installed packages to a file for posterity
+RUN conda env export -n base > vcf2maf.yml
 RUN conda init bash
-
-RUN mkdir /workdir
-
