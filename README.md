@@ -46,3 +46,47 @@ done
 
 
 ```
+
+## Adding support for `--af_gnomadg`
+
+### Original command
+
+```console
+docker run \
+	-v $HOME/data:/work/:rw -v /dev/shm/:/ref/:ro \
+	nfosi/vcf2maf:latest \
+	perl nf-osi-vcf2maf-1b34293/vcf2maf.pl --input-vcf /work/test-small.vcf \
+	--output-maf /work/test-small.maf --vep-data /ref/vep \
+	--ref-fasta /ref/fasta/Homo_sapiens_assembly38.fasta \
+	--vep-path /root/miniconda3/envs/vcf2maf/bin --ncbi-build GRCh38
+```
+
+### Using vcf2maf.sh
+
+This shell script adds support for `--af_gnomadg`
+
+```console
+docker run \
+	-v $HOME/data:/work/:rw -v /dev/shm/:/ref/:ro \
+	-v $HOME/vcf2maf-wf/:/src/:ro \
+	nfosi/vcf2maf:latest \
+	bash /src/vcf2maf.sh --input-vcf /work/test-small.vcf \
+	--output-maf /work/test-small.maf --vep-data /ref/vep \
+	--ref-fasta /ref/fasta/Homo_sapiens_assembly38.fasta \
+	--vep-path /root/miniconda3/envs/vcf2maf/bin --ncbi-build GRCh38
+```
+
+### Using vcf2maf-gnomad-genomes
+
+This uses a forked version of vcf2maf
+
+```console
+docker run \
+	-v $HOME/data:/work/:rw -v /dev/shm/:/ref/:ro \
+	sagebionetworks/vcf2maf:gnomad-genomes \
+	vcf2maf.pl --input-vcf /work/test-small.vcf \
+	--output-maf /work/test-small.maf --vep-data /ref/vep \
+	--ref-fasta /ref/fasta/Homo_sapiens_assembly38.fasta \
+	--vep-path /root/miniconda3/envs/vep/bin --ncbi-build GRCh38
+```
+
