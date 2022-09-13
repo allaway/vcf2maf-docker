@@ -14,7 +14,7 @@ ENV PATH=/root/miniconda3/bin:$PATH
 # Create conda environment 
 COPY environment.yml /
 RUN conda env create -f /environment.yml && conda clean -a
-ENV PATH=/root/miniconda3/envs/vcf2maf/bin:$PATH
+ENV PATH=/root/miniconda3/envs/vep/bin:$PATH
 
 # rsync
 RUN yum install -y rsync \
@@ -23,11 +23,15 @@ RUN yum install -y rsync \
     which
 
 # Install vcf2maf
-RUN bash -c 'export VCF2MAF_URL=`curl -sL https://api.github.com/repos/nf-osi/vcf2maf/releases | grep -m1 tarball_url | cut -d\" -f4`; curl -L -o nf-osi-vcf2maf.tar.gz $VCF2MAF_URL; tar -zxf nf-osi-vcf2maf.tar.gz; cd nf-osi-vcf2maf-*'
+RUN curl -s -L -o vcf2maf.tar.gz https://github.com/Sage-Bionetworks-Workflows/vcf2maf/archive/refs/tags/107.1.tar.gz \
+  && tar -zxf vcf2maf.tar.gz \
+  && rm vcf2maf.tar.gz \
+  && mv $(find . -maxdepth 1 -type d -name '*vcf2maf*') vcf2maf \
+  && chmod a+x vcf2maf/*.pl \
+  && ln -sr vcf2maf/*.pl /usr/local/bin/
 
 # Dump the details of the installed packages to a file for posterity
-RUN conda env export --name vcf2maf > vcf2maf.yml
+RUN conda env export --name vep > vep.yml
 RUN conda init bash
 
 RUN mkdir /workdir
-
