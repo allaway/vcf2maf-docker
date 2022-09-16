@@ -19,6 +19,7 @@ ENV PATH=/root/miniconda3/envs/vep/bin:$PATH
 # rsync
 RUN yum install -y rsync \
     tar \
+    procps \
     perl \
     which
 
