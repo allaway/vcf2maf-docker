@@ -18,16 +18,16 @@ tar -zxf $HOME/.vep/homo_sapiens_vep_112_GRCh38.tar.gz -C $HOME/.vep/
 aws s3 --no-sign-request --region eu-west-1 sync s3://ngi-igenomes/igenomes/Homo_sapiens/GATK/GRCh38/ $HOME/Homo_sapiens_GATK_GRCh38/
 
 ## Get vcfs. Place in $HOME/vcfs
-
+wget https://raw.githubusercontent.com/mskcc/vcf2maf/main/tests/test_b38.vcf
 gunzip $HOME/vcfs/*
 
 docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/.vep:/workdir/vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta:/workdir/fasta:ro -v $HOME/mafs:/workdir/mafs:rw -it --entrypoint /bin/bash nfosi/vcf2maf
 
-cd /nf-osi-vcf2maf-*
+cd /vcf2maf-*
 
 ##test
 
-perl vcf2maf.pl --input-vcf /workdir/vcfs/28cNF.Strelka.filtered.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /root/miniconda3/envs/vcf2maf/bin --vep-data /workdir/vep --ncbi-build GRCh38
+perl vcf2maf.pl --input-vcf /workdir/vcfs/test_b38.vcf --output-maf /workdir/test.vep.maf --ref-fasta /workdir/fasta/Homo_sapiens_assembly38.fasta --vep-path /root/miniconda3/envs/vep/bin --vep-data /workdir/vep --ncbi-build GRCh38
 
 ```
 
