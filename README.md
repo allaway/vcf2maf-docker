@@ -11,7 +11,7 @@ Currently, this image uses a custom fork of vcf2maf to address a small incompati
 ## Need to have rsync and the aws-cliv2 installed.
 
 ## Get VEP 112 database. 
-rsync -avr --progress rsync://ftp.ensembl.org/ensembl/pub/release-112/variation/indexed_vep_cache/homo_sapiens_vep_112_GRCh38.tar.gz $HOME/.vep/
+aws s3 --no-sign-request cp s3://hail-vep-pipeline/vep/cache/homo_sapiens_vep_112_GRCh38.tar.gz .
 tar -zxf $HOME/.vep/homo_sapiens_vep_112_GRCh38.tar.gz -C $HOME/.vep/
 
 ## Get GATK GRCh38 genome (or whatever genome you aligned to if not this one...)
@@ -21,9 +21,9 @@ aws s3 --no-sign-request --region eu-west-1 sync s3://ngi-igenomes/igenomes/Homo
 wget https://raw.githubusercontent.com/mskcc/vcf2maf/main/tests/test_b38.vcf
 gunzip $HOME/vcfs/*
 
-docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/.vep:/workdir/vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta:/workdir/fasta:ro -v $HOME/mafs:/workdir/mafs:rw -it --entrypoint /bin/bash nfosi/vcf2maf
+docker run -v $HOME/vcfs:/workdir/vcfs:rw -v $HOME/.vep:/workdir/vep:ro -v $HOME/Homo_sapiens_GATK_GRCh38/Sequence/WholeGenomeFasta:/workdir/fasta:ro -v $HOME/mafs:/workdir/mafs:rw -it --entrypoint /bin/bash ghcr.io/allaway/vcf2maf-docker:main
 
-cd /vcf2maf-*
+cd /vcf2maf
 
 ##test
 
