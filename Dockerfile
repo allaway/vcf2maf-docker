@@ -24,7 +24,7 @@ RUN yum install -y rsync \
     which
 
 # Install vcf2maf
-RUN curl -s -L -o vcf2maf.tar.gz https://github.com/mskcc/vcf2maf/archive/refs/tags/v1.6.22.tar.gz \
+RUN curl -s -L -o vcf2maf.tar.gz https://github.com/allaway/vcf2maf/archive/refs/tags/testing-plugins.tar.gz \
   && tar -zxf vcf2maf.tar.gz \
   && rm vcf2maf.tar.gz \
   && mv $(find . -maxdepth 1 -type d -name '*vcf2maf*') vcf2maf \
